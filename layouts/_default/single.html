@@ -1,5 +1,5 @@
 {{ define "title" -}}
-  {{ .Title }} &ndash; {{ .Site.Title }}
+  {{ .Title }} // {{ .Site.Title }}
 {{- end }}
 {{ define "header" }}
   {{ partial "menu" . }}
@@ -7,7 +7,11 @@
 {{ define "main" }}
   <h1>{{ .Title }}</h1>
   {{ .Content }}
+  {{if .PrevInSection}}
+    <a href="{{if .PrevInSection}}{{.PrevInSection.Permalink}}{{end}}"><< {{.PrevInSection.Title}}</a>
+  {{end}} // 
+  {{if .NextInSection}}
+    <a href="{{if .NextInSection}}{{.NextInSection.Permalink}}{{end}}">{{.NextInSection.Title}} >></a>
+  {{end}}
 {{ end }}
-{{ define "footer" }}
-  {{ partial "powered-by" . }}
-{{ end }}
+
